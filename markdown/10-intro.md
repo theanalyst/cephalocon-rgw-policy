@@ -1,7 +1,7 @@
 <!-- .slide: data-state="cover" id="cover-page" data-timing="20" data-menu-title="Cover slide" -->
 <div class="title">
-    <h1>SUSE<sub>&reg;</sub> Presentation</h1>
-    <h2>Guidelines and Template</h2>
+    <h1>Releasing Krakens & Other Cephalopods in the Wild</h1>
+    <h2>Ceph Releases- the past, present and the future</h2>
 </div>
 
 <div class="row presenters">
@@ -16,27 +16,27 @@
     <div class="qr-embedded-wrapper">
         <div class="qrcode" id="qrcode-talk-embedded" />
     </div>
-    <h2><a href="https://goo.gl/FIXME" target="_blank"
-           id="talk-embedded">https://goo.gl/FIXME</a></h2>
+    <h2><a href="https://includeio.stream/cephalocon-ceph-releases" target="_blank"
+           id="talk-embedded">https://includeio.stream/cephalocon-ceph-releases</a></h2>
 </div>
 
 
 <!-- .slide: data-state="normal" id="agenda" data-menu-title="Agenda" -->
-## Contents / agenda
+<!-- ## Contents / agenda -->
 
-<h3>
-Welcome to the [`reveal.js`](https://github.com/hakimel/reveal.js/)
-version of the guidelines and template for SUSE presentations.
-</h3>
+<!-- <h3> -->
+<!-- Welcome to the [`reveal.js`](https://github.com/hakimel/reveal.js/) -->
+<!-- version of the guidelines and template for SUSE presentations. -->
+<!-- </h3> -->
 
-It contains the following slides (you can also press `m` at any
-time to reveal a navigation menu):
+<!-- It contains the following slides (you can also press `m` at any -->
+<!-- time to reveal a navigation menu): -->
 
-*   Guidelines
-    *   Template Instructions
-    *   Color Palette
-    *   Graphics and Typeface
-    *   Editorial Guidelines
-    *   Slide Trademarking Guidelines
+<!-- *   Guidelines -->
+<!--     *   Template Instructions -->
+<!--     *   Color Palette -->
+<!--     *   Graphics and Typeface -->
+<!--     *   Editorial Guidelines -->
+<!--     *   Slide Trademarking Guidelines -->
 
-*   Presentation template slides
+<!-- *   Presentation template slides -->
