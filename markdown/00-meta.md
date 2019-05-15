@@ -16,4 +16,4 @@
 
 <div class="qrcode" id="qrcode-talk"/>
 <h2><a href="https://example.com/link/to/this/talk" target="_blank"
-       id="talk">https://example.com/link/to/this/talk</a></h2>
+       id="talk">https://includeio.stream/cephalocon-ceph-releases</a></h2>
