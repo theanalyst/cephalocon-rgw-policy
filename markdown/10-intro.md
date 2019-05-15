@@ -12,15 +12,6 @@
     </div>
 </div>
 
-<div class="qr-embedded">
-    <div class="qr-embedded-wrapper">
-        <div class="qrcode" id="qrcode-talk-embedded" />
-    </div>
-    <h2><a href="https://includeio.stream/cephalocon-ceph-releases" target="_blank"
-           id="talk-embedded">https://includeio.stream/cephalocon-ceph-releases</a></h2>
-</div>
-
-
 <!-- .slide: data-state="normal" id="agenda" data-menu-title="Agenda" -->
 <!-- ## Contents / agenda -->
 
