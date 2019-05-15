@@ -15,7 +15,7 @@
 
 <!-- .slide: data-state="section-break" data-menu-title="history-title" id="history-title" -->
 <div class="title">
-<h1>Ceph: through the years
+<h1>Ceph: through the years</h1>
 </div>
 
 
@@ -31,6 +31,7 @@
 - Open Sourced in 2006 under LGPLv2*
 - Research phase 2004 -2007, DH 2007-2012, Inktank 2012-14
 
+
 <!-- .slide: data-state="normal" id="timeline" data menu title="timeline"-->
 
 # Timeline of Major features
@@ -42,3 +43,25 @@
 - RBD 2010
 - kRBD 2011
 - Argonaut v0.48 Jul 2012
+
+
+
+<!-- .slide: data-state="section-break" data-menu-title="release policy" id="release policy" -->
+<div class="title">
+<h1> Release Policy </h1>
+<h2> The Past, Present and Future </h2>
+</div>
+
+
+<!-- .slide: data-state="normal" id="release-policy-past" data menu title="release-policy-past"-->
+
+- Alphabetical release names, Argonaut -> Nautilus, Octopus 
+- Version numbering: Past 
+  + Until hammer, major releases did not have a fixed scheme
+  + More or less random numbers 0.48 (argonaut), 0.56 (bobtail)
+  + Minor versions represented backport versions eg.
+        firefly (v0.80) v0.80.1-> v0.80.11)
+        hammer (v0.94)  v0.94.1 -> v0.94.10
+  + Approximate 6 month release cadence until Firefly May '14
+
+  
