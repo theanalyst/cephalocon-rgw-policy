@@ -100,9 +100,7 @@
   ceph version 14.2.1-62-g584940cd0f (584940cd0f9c76aa3a91b525dbd00b81166c1778) nautilus (stable)
   ```  
 - Each major release gets the next successive number & letter
-  + ~~infernalis 9.y.z~~
-  + ~~Jewel 10.y.z~~
-  + ~~Kraken 11.y.z~~
+  + Infernalis 9.y.z ...
   + Luminous 12.y.z
   + Mimic 13.y.z
   + Nautilus 14.y.z
@@ -164,7 +162,7 @@
 # Upgrade support
 - Online rolling upgrade support & testing from the last 2 stable releases
 - Ie. for Nautilus this means:
-  + Luminous → Nautilus
+  + Luminous (eg. v12.2.10) → Nautilus (eg. 14.2.1)
   + Mimic → Nautilus
 - For releases older than these, LTS upgrades were supported
   + Jewel → Kraken → Luminous 
@@ -172,3 +170,56 @@
 - Odd releases must reach prior to Luminous must reach Luminous before upgrade
   + ~~Kraken → Mimic~~
   + Kraken → Luminous → Mimic 
+
+
+<!-- .slide: data-state="normal" id="upgrade-notes" data menu title="upgrade-notes"-->
+# Upgrade Notes
+- Usually at every major release announcement a special section mentioned for
+  upgrade notes
+- These precautions are to be followed when upgrading from the previous stable
+  release point to current stable release point 
+- While skipping versions, it is best to go through the release notes of
+  previous sections for special precautions
+
+
+
+<!-- .slide: data-state="section-break" data-menu-title="Workflow" id="Workflow" -->
+<div class="title">
+<h1>Workflow</h1>
+<h2>How to Contribute</h2>
+</div>
+
+
+<!-- .slide: data-state="normal" id="feature prs" data menu title="feature-prs"-->
+# Workflow
+## Feature PRs
+- Starts with mail to ceph-devel &/ tracker issue
+- Always PRs against master
+  + Apply labels if you have permissions, these are used in release notes
+  + Titling the PR correcly also helps in release notes
+
+- Signed-Off-By:
+  + Jenkins checked, needed for acceptance
+  + Sign with organizational email/ add mailmap entries to map credits to organization
+  + unknown affiliations may be marked as individual contributors with no organization
+
+- Backports of features are generally avoided* 
+  - unless the functionality is really important & aids bug fixes
+
+- Testing usually done in batches, as teuthology runs are expensive in terms of
+  resources & time
+
+
+<!-- .slide: data-state="normal" id="bug-fix" data menu title="bug fix prs"-->
+## Bug Reports & Fixes
+- Always mark the release affected while raising a bug
+  + Helps us mark the relevant backports when addressing the bug fix
+  + Developer raising the fix against master may not be the backporter
+  
+- Bug scrubs occur weekly in every component
+  + Consider joining, get an overview of major bugs affecting a release
+  + Many "easy-first-bugs" are also found, with lower barrier of entry
+  
+- When the master PR is merged, the developer/reviewer must ensure
+  + status moves to "Pending Backport"
+  + Backport fields are appropriately filled
