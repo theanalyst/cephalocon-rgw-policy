@@ -59,8 +59,8 @@
 
 
 <!-- .slide: data-state="normal" id="acl-overview" data menu title="acl-overview"-->
-## ACLs 
-### Overview
+# ACLs 
+## Overview
 - Available for the following resources 
   + Bucket ACLs
   + Object ACLs
@@ -72,7 +72,7 @@
 
 <!-- .slide: data-state="normal" id="normal-acls" data menu title="normal-acls"-->
 
-### Normal ACLs
+## Normal ACLs
 Syntax
 
 ```xml
@@ -96,7 +96,7 @@ Syntax
 
 <!-- .slide: data-state="normal" id="normal-acls elt" data menu title="normal-acls elt"-->
 
-#### Elements
+### Elements
 - Owner
   + Usually Bucket owner
   + Always has `FULL_CONTROL` of the resources
@@ -118,7 +118,7 @@ Syntax
 
 
 <!-- .slide: data-state="normal" id="canned-acls" data menu title="canned-acls"-->
-
+### Canned ACLs
 + private
 + bucket-owner-read
 + bucket-owner-full-control
@@ -127,9 +127,73 @@ Syntax
 
 
 <!-- .slide: data-state="normal" id="acl-issues" data menu title="acl-issues"-->
+### Issues
 - Blanket Permissions
 - Not possible to provide access to grantee based on attributes on object
   + Object tags/x-amz-attributes
 - Not possible to enforce grantee to follow certain attributes when writing
   + For eg. Encrypted uploads-only
 - Public ACLs are too risky other than in specific circumstances
+
+
+<!-- .slide: data-state="normal" id="bucket-policy" data menu title="bucket-policy"-->
+# Bucket Policy
++ Grant access to resources (buckets, objects)
++ Richer policy based language
+
+```json
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"PublicReadformyOrg",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::examplebucket/*"]
+       "Condition": {
+         "IpAddress": {"aws:SourceIp": "54.240.143.0/24"},
+    }
+  ]
+}
+```
+
+<!-- .slide: data-state="normal" id="bucket-lang" data menu title="bucket-lang"-->
+## Language Overview
+- Principal
+- Action 
+- Effect - Allow/Deny
+- Resource
+- Condition
+
+
+<!-- .slide: data-state="normal" id="principal" data menu title="principal"-->
+### Principal
+```
+"AWS":"Account-ARN"
+```
++ Grantee
++ TenantID:UserID in RGW context
+
+
+<!-- .slide: data-state="normal" id="resource" data menu title="resource"-->
+### Resource
+
+Syntax
+```
+arn:partition:service:region:namespace:relative-id
+```
+
+- Not everything needs to be specified 
+- Usually a bucket/objects
+- Wildcards 
+  `*` Any
+  `?` single char
+
+Example:
+```
+arn:aws:s3:::bucket_name
+arn:aws:s3:::bucket_name/key_name
+
+```
+
