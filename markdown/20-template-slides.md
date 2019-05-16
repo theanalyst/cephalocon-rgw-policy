@@ -32,6 +32,10 @@
 - Research phase 2004 -2007, DH 2007-2012, Inktank 2012-14
 
 
+<!-- .slide: data-state="normal" id="history" data menu title="history"-->
+<img alt="authors" width=90% src="images/authors.png"/>
+
+
 <!-- .slide: data-state="normal" id="timeline" data menu title="timeline"-->
 
 # Timeline of Major features
