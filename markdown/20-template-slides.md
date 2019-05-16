@@ -223,3 +223,47 @@
 - When the master PR is merged, the developer/reviewer must ensure
   + status moves to "Pending Backport"
   + Backport fields are appropriately filled
+  + If issue affects only master, then status moves to "Resolved"
+
+
+<!-- .slide: data-state="normal" id="bug-fix2" data menu title="bug fix prs 2" -->
+## Pending Backport Issues
+- From time to time, the stable releases & backports team creates backport
+  issues for all targets
+- A Backport target is a issue + stable release combo
+- Eg: issue: http://tracker.ceph.com/issues/38724
+  Backport targets: luminous, mimic, nautilus , seperate targets created:"
+  + 38724 -> luminous (backport issue: http://tracker.ceph.com/issues/39694)
+  + 38724 -> mimic (backport issue: http://tracker.ceph.com/issues/39692)
+  + 38724 -> nautilus (backport issue: http://tracker.ceph.com/issues/39693)
+- A seperate backport tracker ensures that backport is independant of other
+  backports and special comments/fixes can be release specific
+
+
+<!-- .slide: data-state="normal" id="backport-workflow" data menu title="backport workflow"-->
+# Backports 
+## Getting started
+- ceph backports are a low threshold way to get involved & contribute to Free Software
+- If you're looking to get involved in ceph & don't know where to start:
+  + Backporting can be interesting
+  + Usually involves all the components of ceph
+- First thing to do is create an account in ceph tracker
+- Process is documented at http://tracker.ceph.com/projects/ceph-releases/wiki/HOWTO_backport_commits
+
+
+<!-- .slide: data-state="normal" id="backport-workflow2" data menu title="backport workflow"-->
+## Getting started 
+- Any issue in "New" status can be taken over
+<img src="images/queries.png"/>
+
+
+<!-- .slide: data-state="normal" id="backport-contributing" data menu title="backport contributing"-->
+## Contributing
+- Most of the scripts needed for backporting are already present in ceph/src/scripts
+- Using these ensure that the full workflow is followed, so that status is
+  correctly picked up release tooling
+- QA suites are run regularly in batches, but requires PRs to be populated and correct 
+- Currently with a very tiny backports team on a volunteer basis, hitting a ~4-6
+  week release target gets difficult
+- More contributors or test resource contributions can help us reach a better stable release cadence.
+- Every little bit helps!
