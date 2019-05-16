@@ -1,7 +1,7 @@
 <!-- .slide: data-state="cover" id="cover-page" data-timing="20" data-menu-title="Cover slide" -->
 <div class="title">
-    <h1>Releasing Krakens & Other Cephalopods in the Wild</h1>
-    <h2>Ceph Releases- the past, present and the future</h2>
+    <h1>Avoiding the Curious Case of Leaky Cauldrons</h1>
+    <h2>Access Control done right!</h2>
 </div>
 
 <div class="row presenters">
