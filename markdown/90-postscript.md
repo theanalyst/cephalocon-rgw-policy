@@ -1,17 +1,3 @@
-<!-- .slide: data-state="normal" id="call-to-action" data-menu-title="Call to action" -->
-<div class="call-to-action">
-    <h2 class="inside">
-        Call to action line one <br />
-        and call to action line two <br />
-        <a href="http://www.calltoaction.com">www.calltoaction.com</a>
-    </h2>
-
-    <h2 class="outside">
-        Thank you.
-    </h2>
-</div>
-
-
 <!-- .slide: data-state="section-break" data-menu-title="Q & A" id="Q-and-A" -->
 # Questions?
 
@@ -57,46 +43,3 @@ All third-party trademarks are the property of their respective
 owners.
 
 
-<!-- .slide: data-state="section-break" id="internal-use-slides" data-timing="10s" -->
-# Internal Use Slides
-
-
-<!-- .slide: data-state="cover" id="internal-cover-page" data-timing="20" -->
-<div class="title">
-    <h1>Presentation Title</h1>
-    <h2>Subhead or Second Line</h2>
-</div>
-
-<div class="row presenters">
-    <div class="presenter presenter-1">
-        <h3 class="name">First Presenter's Name</h3>
-        <h3 class="job-title">Job Title</h3>
-        <h3 class="email"><a href="mailto:firstname.lastname@suse.com">firstname.lastname@suse.com</a></h3>
-    </div>
-    <div class="presenter presenter-2">
-        <h3 class="name">Second Presenter's Name</h3>
-        <h3 class="job-title">Job Title</h3>
-        <h3 class="email"><a href="mailto:firstname.lastname@suse.com">firstname.lastname@suse.com</a></h3>
-    </div>
-</div>
-
-<div class="internal-use-footer" style="text-align: center;">
-    For Internal Use Only
-</div>
-
-
-<!-- .slide: data-state="normal" id="internal-normal-slide" data-timing="20s" data-menu-title="Internal text slide" -->
-## Internal slide title
-
-*   First-level bullet
-
-<div class="internal-use-footer">
-    For Internal Use Only
-</div>
-
-
-<!-- .slide: data-menu-title="License" class="full-screen" id="license" data-state="blank-slide" -->
-<img data-src="images/by-sa.svg"
-     alt="Creative Commons BY-SA license" />
-
-Note: Add conclusion notes here.
