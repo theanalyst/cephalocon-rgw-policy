@@ -33,7 +33,7 @@
 
 
 <!-- .slide: data-state="normal" id="history" data menu title="history"-->
-<img alt="authors" width=90% src="images/authors.png"/>
+<img alt="authors" width=95% data-src="images/author-org.svg"/>
 
 
 <!-- .slide: data-state="normal" id="timeline" data menu title="timeline"-->
