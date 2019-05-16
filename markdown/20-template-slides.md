@@ -93,8 +93,12 @@
 - Version number transition from Hammer v0.94 to Infernalis v9.2.0
 - New scheme `x.y.z`
   + x: major release number
-  + y: 0 - dev. 1 - RC 2 - stable
+  + y: 0 - dev. 1 - RC 2 - stable*
   + z: point release number 
+- Also readable from the version string / ceph versions command  
+  ```
+  ceph version 14.2.1-62-g584940cd0f (584940cd0f9c76aa3a91b525dbd00b81166c1778) nautilus (stable)
+  ```  
 - Each major release gets the next successive number & letter
   + ~~infernalis 9.y.z~~
   + ~~Jewel 10.y.z~~
@@ -109,12 +113,62 @@
 # Release Cadence: Past 
 - From Firefly until Luminous, even numbered releases were LTS
   + Backports and bug fixes until the next LTS releases
+  + Some releases received a lot of backports firely 11, Hammer 10, Luminous 12+
 - odd numbered releases eg Kraken, got less attention and were not maintained for a long time 
   + EOL'ed when the next release was declared stable
   + Backports only for a single release timeframe
 
+
 <!-- .slide: data-state="normal" id="release-present" data menu title="release-present"-->
 # Release Cadence: Present
 - New release cadence as of Luminous:
-  + 9 month release time
-  + at any given time, at least 2 stable releases maintained (receiving backports and new releases from time to time )
++ 9 month release time
++ at any given time, at least 2 stable releases maintained 
++ These will receive backports and new releases from time to time 
+- 3 categories of releases: dev, RC, stable
+
+
+<!-- .slide: data-state="normal" id="dev-releases" data menu title="dev-release"-->
+## Release Type: Development releases
+- Every ~6-8 weeks towards the later end of release cycle
+- Intended only for testing 
+- Upgrade tests from the last stable release
+- Shaman builds
+- Upgradeability between dev releases
+  + Efforts are made to allow *offline* upgrade 
+  + No real attempts to support rolling upgrades 
+  + intent: deployment of non-prod. clusters without the need to repopulate data 
+
+
+<!-- .slide: data-state="normal" id="rc" data menu title="rc"-->
+## Release Type: Release Candidates
+
+- Feature release ~6 weeks prior to the stable rleease
+- Focus mainly on bug fixes after this point
+- Intended for testing and validation of upcoming stable release
+- *NOT* meant for production 
+
+
+<!-- .slide: data-state="normal" id="stable" data menu title="stable"-->
+## Release Type: Stable Releases
+
+- Initial release will be `x.2.0`
+- Semi regular bug fixes and occasional small feature backports
+- Intended for production deployments
+- Backport support for 2 full release cycles
+- Online rolling upgrade support & testing from the last 2 stable releases 
+  (starting from Luminous)
+
+
+<!-- .slide: data-state="normal" id="upgrades" data menu title="upgrades"-->
+# Upgrade support
+- Online rolling upgrade support & testing from the last 2 stable releases
+- Ie. for Nautilus this means:
+  + Luminous → Nautilus
+  + Mimic → Nautilus
+- For releases older than these, LTS upgrades were supported
+  + Jewel → Kraken → Luminous 
+  + Jewel → Luminous 
+- Odd releases must reach prior to Luminous must reach Luminous before upgrade
+  + ~~Kraken → Mimic~~
+  + Kraken → Luminous → Mimic 
