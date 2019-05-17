@@ -98,8 +98,8 @@ Syntax
 
 ### Elements
 - Owner
-  + Usually Bucket owner
-  + Always has `FULL_CONTROL` of the resources
+  + Usually Bucket owner, but maybe uploader
+  + Always has `FULL_CONTROL` of the bucket
   + trying to change this will be a noop
   
 - Grantee
@@ -107,7 +107,10 @@ Syntax
     - specified by `tenant_id:user_id` 
   + Group
     - All Users Group
+	  + Public 
     - Authenticated Users Group
+	  + Remember Authenticated not Authorized
+
 
 - Permissions
   + `READ`
@@ -124,6 +127,55 @@ Syntax
 + bucket-owner-full-control
 + public-read
 + public-read-write
+
+
+<!-- .slide: data-state="normal" id="example1" data menu title="example1"-->
+## Example Use Case
+- Case 1: public folder within a bucket
+
+  A bucket has a folder public whose contents need to be
+  publically accessible 
+  + <p class="fragment fade-in-then-out">Obviously make the bucket public</p>
+  + <p class="fragment">Copy public contents to another public bucket</p>
+  + <p class="fragment">Set object ACL to public for each of the objects in public folder</p>
+
+
+<!-- .slide: data-state="normal" id="example2" data menu title="example2"-->
+## Example Use Cases
+- Case 2: Simple Upload only shared bucket
+  + Alice has a bucket `testbucket`, wants to make Bob upload keys to it
+  + Bucket created, with `WRITE` acl to Bob
+  ```json
+        {
+            "Grantee": {
+                "Type": "CanonicalUser",
+                "ID": "Bob"
+            },
+            "Permission": "WRITE"
+        }
+  ```
+  + Bob writes a simple object `octocat.jpg` to `testbucket`
+  + <p class="fragment">Object created with default acl</p> 
+  + <p class="fragment">Default ACL with respect to Object Owner & not Bucket Owner</p>
+  + <p class="fragment">
+  ```
+  {
+    "Owner": {"DisplayName": "Bobby","ID": "bob"},
+    "Grants": [{"Grantee": {
+                "Type": "CanonicalUser",
+                "DisplayName": "Bobby",
+                "ID": "bob"},
+            "Permission": "FULL_CONTROL"}]}
+	```
+</p>
+
+
+<!-- .slide: data-state="normal" id="examples-ans" data menu title="examples-ans"-->
+- Case1: Solutions To actually make Alice access `octocat`
+  + <p class="fragment highlight-red">Upload with public read ACL</p>
+  + <p class="fragment">add Alice as a grantee with READ as object acl</p>
+  + <p class="fragment">Use the bucket-owner-read/full-control canned acl</p>
+  + Note, this cannot be enforced with ACLs yet
 
 
 <!-- .slide: data-state="normal" id="acl-issues" data menu title="acl-issues"-->
@@ -157,6 +209,7 @@ Syntax
   ]
 }
 ```
+
 
 <!-- .slide: data-state="normal" id="bucket-lang" data menu title="bucket-lang"-->
 ## Language Overview
@@ -196,4 +249,23 @@ arn:aws:s3:::bucket_name
 arn:aws:s3:::bucket_name/key_name
 
 ```
+
+
+<!-- .slide: data-state="normal" id="action" data menu title="action"-->
+
+### Condition
+- Policy is evaluated to True only when condition is satisfied
+- Two types of conditional: AWS wide keys, S3 specific
+  + We don't support the full AWS Subset, but still support a very large subset
+	aws:Username, aws:SourceIp, aws:SecureTransport etc.
+  + S3 specific keys: specific conditionals depending on the API
+  + eg. createBucket, s3:x-amz-acl and s3:x-amz-grant-<perm> can be specified
+        ListBucket, s3:prefix 
+        PutObject, s3:x-amz-server-side-encryption
+		
+	also restrict based on presence of specific object tags
+		
+
+<!-- .slide: data-state="normal" id="policy-review" data menu title="policy-review"-->
+## Adding it all up
 
