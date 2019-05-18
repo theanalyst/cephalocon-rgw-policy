@@ -131,13 +131,15 @@ Syntax
 
 <!-- .slide: data-state="normal" id="example1" data menu title="example1"-->
 ## Example Use Case
-- Case 1: public folder within a bucket
+Case 1: public folder within a bucket
 
-  A bucket has a folder public whose contents need to be
-  publically accessible 
-  + <p class="fragment fade-in-then-out">Obviously make the bucket public</p>
-  + <p class="fragment">Copy public contents to another public bucket</p>
-  + <p class="fragment">Set object ACL to public for each of the objects in public folder</p>
+A bucket has a folder public whose contents need to be
+publically accessible 
++ <p class="fragment fade-in-then-out">Obviously make the bucket public</p>
++ <p class="fragment">Copy public contents to another public bucket</p>
++ <p class="fragment">Set object ACL to public for each of the objects in public folder</p>
+<p class="fragment">  - More secure than the other options, but new objects need to be taken care of</p>
+<p class="fragment">  - Turning this off requires effort</p>
 
 
 <!-- .slide: data-state="normal" id="example2" data menu title="example2"-->
@@ -171,11 +173,11 @@ Syntax
 
 
 <!-- .slide: data-state="normal" id="examples-ans" data menu title="examples-ans"-->
-- Case1: Solutions To actually make Alice access `octocat`
+- Case2: Solutions To actually make Alice access `octocat`
   + <p class="fragment highlight-red">Upload with public read ACL</p>
   + <p class="fragment">add Alice as a grantee with READ as object acl</p>
   + <p class="fragment">Use the bucket-owner-read/full-control canned acl</p>
-  + Note, this cannot be enforced with ACLs yet
+  + <p class="fragment">Note, this cannot be enforced with ACLs yet</p>
 
 
 <!-- .slide: data-state="normal" id="acl-issues" data menu title="acl-issues"-->
@@ -264,8 +266,50 @@ arn:aws:s3:::bucket_name/key_name
         PutObject, s3:x-amz-server-side-encryption
 		
 	also restrict based on presence of specific object tags
-		
+
 
 <!-- .slide: data-state="normal" id="policy-review" data menu title="policy-review"-->
 ## Adding it all up
+### Case 1: Partially public bucket
+Expose only a folder in a bucket
 
+```
+                {...
+                   "Effect": "Allow",
+                    "Principal": {"AWS": "*"},
+                    "Action": "s3:ListBucket",
+                    "Resource": "arn:aws:s3:::s3testb",
+                    "Condition": {
+                        "StringEquals" : {"s3:prefix": "public"}}
+                },
+                {...
+                    "Principal": {"AWS": "*"},
+                    "Action": "s3:GetObject",
+                    "Resource": "arn:aws:s3:::s3testb/public*"
+                }
+
+```
+
+- Ability to List the bucket with the prefix also can be allowed in
+  addition to GETs
+- Dropping the policy will revert back to the private mode
+
+
+<!-- .slide: data-state="normal" id="policy-case2" data menu title="policy-case2"-->
+### Case 2: Alice's write-only shared bucket
+```
+	{..
+	"Action": "s3:PutObject",
+	"Resource": "arn:aws:s3:::s3testb/bob*"
+	"Condition": {
+		"StringEquals" : {
+            "s3:x-amz-acl": "bucket-owner-full-control"
+			}
+	}..	
+```
+Can additionally impose
+- path restictions
+- Object tag/ metadata restrictions 
+- Read/Write/List permissions 
+- Encryption
+...
