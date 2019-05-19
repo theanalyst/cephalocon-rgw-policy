@@ -39,9 +39,15 @@
 
 <!-- .slide: data-state="normal" id="fundamentals" data menu title="fundamentals"-->
 # Fundamentals
-- Users
 - Buckets
+  + Fundamental container for Objects
+  + Default namespace is global 
 - Keys
+  + Objects are the fundamental data blobs
+  + Buckets & Keys together identify objects 
+- Users
+  + Support for Tenants, allowing for namespace buckets
+  + By default all user content is private and not shared to other users
 
 
 
@@ -53,9 +59,15 @@
 
 <!-- .slide: data-state="normal" id="share-overview" data menu title="share-overview"-->
 # Controlling Access: S3 API
-- ACLs
-- Bucket Policy
-- User Policy
+Access Control
+  + ACLs
+  + Bucket Policy
+  + User Policy
+
+Related Object Support
+- *LifeCycle*: Lifecycling objects, transitions to other storage class, expiration of 
+  objects and incomplete multipart uploads.
+- *Versioning*: Preserve historical versions of objects
 
 
 <!-- .slide: data-state="normal" id="acl-overview" data menu title="acl-overview"-->
@@ -66,13 +78,13 @@
   + Object ACLs
 - Default ACL always created with private and owner full control permissions
 - Two types
-  + Normal ACL: specified with one of the specific PUT ACL ops
+  + Regular ACL: specified with one of the specific PUT ACL ops or with `x-amz-grant` headers
   + Canned ACL: specified inline during an op
 
 
 <!-- .slide: data-state="normal" id="normal-acls" data menu title="normal-acls"-->
 
-## Normal ACLs
+## Regular ACLs
 Syntax
 
 ```xml
@@ -99,25 +111,29 @@ Syntax
 ### Elements
 - Owner
   + Usually Bucket owner, but maybe uploader
-  + Always has `FULL_CONTROL` of the bucket
+  + Usually has `FULL_CONTROL` of the bucket
   + trying to change this will be a noop
   
-- Grantee
-  + User
-    - specified by `tenant_id:user_id` 
-  + Group
-    - All Users Group
-	  + Public 
-    - Authenticated Users Group
-	  + Remember Authenticated not Authorized
+- ACL: List of Grants
 
 
-- Permissions
+<!-- .slide: data-state="normal" id="normal-acls elt2" data menu title="normal-acls elt2"-->
+
+### Grants
+- Grantee:
+  + User: specified by `tenant_id:user_id` 
+  + Groups: All Users Group,
+    Authenticated Users Group
+
+- Permissions/Grant
   + `READ`
   + `WRITE`
   + `READ_ACP`
   + `WRITE_ACP`
   + `FULL_CONTROL`
+
+- Can also be specified inline with `x-amz-grant` headers
+- Usually limited to 100 grants per ACL
 
 
 <!-- .slide: data-state="normal" id="canned-acls" data menu title="canned-acls"-->
@@ -135,7 +151,7 @@ Case 1: public folder within a bucket
 
 A bucket has a folder public whose contents need to be
 publically accessible 
-+ <p class="fragment fade-in-then-out">Obviously make the bucket public</p>
++ <p class="fragment fade-">Obviously make the bucket public</p>
 + <p class="fragment">Copy public contents to another public bucket</p>
 + <p class="fragment">Set object ACL to public for each of the objects in public folder</p>
 <p class="fragment">  - More secure than the other options, but new objects need to be taken care of</p>
@@ -194,6 +210,7 @@ publically accessible
 # Bucket Policy
 + Grant access to resources (buckets, objects)
 + Richer policy based language
++ Evaluated first before ACLs are applied
 
 ```json
 {
@@ -313,3 +330,38 @@ Can additionally impose
 - Read/Write/List permissions 
 - Encryption
 ...
+
+
+<!-- .slide: data-state="normal" id="user-policy" data menu title="user-policy"-->
+# User Policy
+- New in Nautilus
+- Allow Users/Groups within an Account to S3 Actions 
+- Tenants are mapped to Account IDs in RGW 
+- Nautilus also supports creation of Groups and some User Policy
+  actions
+- STS Lite implementation, allows Assume Role with temporary credentials
+
+
+<!-- .slide: data-state="normal" id="OPA" data menu title="OPA"-->
+# OPA
+- Nautilus RGW can integrate with OPA for authenticating & authorization
+- Supports a policy based controlled access to resources
+- Sites already running OPA can reuse this service itself for Bucket Policy actions
+
+
+<!-- .slide: data-state="normal" id="policy-conclusion" data menu title="policy conclusion"-->
+
+# Conclusion 
+- In general Bucket Policies can replace most common ACL use cases
+- Wider API support
+- More finegrained control 
+
+
+<!-- .slide: data-state="normal" id="future-work" data menu title="future-work"-->
+
+# Future Work
+- Support for blocking public access via the BlockPublic{ACL/Policy}
+- User Policy improvements
+- To provide support for other OpenId Connect/ Oauth 2.0 compliant Web
+  Idps for the AssumeRoleWithWebIdentity API.
+- To make sure that RGW integrates with Hadoop using STS
