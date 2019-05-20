@@ -1,7 +1,6 @@
 <!-- .slide: data-state="cover" id="cover-page" -->
 <div class="title">
     <h1>Avoiding the Curious Case of Leaky Cauldrons</h1>
-        <h2>Access Control done right!</h2>
 </div>
 
 <div class="row presenters">
@@ -22,19 +21,22 @@
 
 <!-- .slide: data-state="normal" id="intro" data menu title="intro"-->
 # RGW
-- Object Storage Client to the Ceph Cluster
+- Object Storage Client to the Ceph cluster
 - Exposes S3 & Swift API 
 - Immutable Objects*, not 1:1 mapped to rados objects
 - User Accounts, Buckets, ACLs
-- Rich ecosystem of S3 & Swift client tooling which can be leveraged
+
+<p align="center">
+<img data-src="images/rgw.png", alt="rgw">
+</p>
 
 
 <!-- .slide: data-state="normal" id="use-cases" data menu title="use-cases"-->
-# Typical Use Cases
-- Cloud Native application data
-- CDN usecases
-- Backup & Archival 
-- DR (with multisite)
+# Differences between RGW & Rados objects
+- ACLs (per object instead of pool)
+- Object sizes 
+- Indexed
+- Immutability*
 
 
 <!-- .slide: data-state="normal" id="fundamentals" data menu title="fundamentals"-->
@@ -42,8 +44,9 @@
 - Buckets
   + Fundamental container for Objects
   + Default namespace is global 
-- Keys
-  + Objects are the fundamental data blobs
+- Objects
+  + Data Blobs
+  + Identified by Key/Object name 
   + Buckets & Keys together identify objects 
 - Users
   + Support for Tenants, allowing for namespace buckets
@@ -151,7 +154,7 @@ Case 1: public folder within a bucket
 
 A bucket has a folder public whose contents need to be
 publically accessible 
-+ <p class="fragment fade-">Obviously make the bucket public</p>
++ <p class="fragment highlight-red">Obviously make the bucket public</p>
 + <p class="fragment">Copy public contents to another public bucket</p>
 + <p class="fragment">Set object ACL to public for each of the objects in public folder</p>
 <p class="fragment">  - More secure than the other options, but new objects need to be taken care of</p>
